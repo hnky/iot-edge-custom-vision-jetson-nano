@@ -1,27 +1,8 @@
-# To make python 2 and python 3 compatible code
 from __future__ import absolute_import
-
 from threading import Thread
 import sys
-#if sys.version_info[0] < 3:  # e.g python version <3
 import cv2
-#else:
-#    import cv2
-#    from cv2 import cv2
-# pylint: disable=E1101
-# pylint: disable=E0401
-# Disabling linting that is not supported by Pylint for C extensions such as OpenCV. See issue https://github.com/PyCQA/pylint/issues/1955
-
-
-# import the Queue class from Python 3
-if sys.version_info >= (3, 0):
-    from queue import Queue
-# otherwise, import the Queue class for Python 2.7
-else:
-    from Queue import Queue
-
-# This class reads all the video frames in a separate thread and always has the keeps only the latest frame in its queue to be grabbed by another thread
-
+from queue import Queue
 
 class VideoStream(object):
     def __init__(self, path, queueSize=3):

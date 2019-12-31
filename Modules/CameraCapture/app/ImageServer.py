@@ -1,5 +1,4 @@
 # Base on work from https://github.com/Bronkoknorb/PyImageStream
-#import trollius as asyncio
 import asyncio
 import tornado.ioloop
 import tornado.web
