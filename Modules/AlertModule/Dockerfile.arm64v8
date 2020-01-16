@@ -1,0 +1,8 @@
+FROM python:3.7-slim-buster
+
+RUN apt update
+
+RUN pip install azure-iot-device
+
+ADD /app/ .
+ENTRYPOINT [ "python", "-u", "./main.py" ]

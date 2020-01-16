@@ -2,7 +2,7 @@
     "$schema-version": "0.0.1",
     "description": "",
     "image": {
-        "repository": "$CONTAINER_REGISTRY_ADDRESS/alertmodule",
+        "repository": "$CONTAINER_REGISTRY_ADDRESS/customvisionmodule",
         "tag": {
             "version": "$CONTAINER_MODULE_VERSION",
             "platforms": {

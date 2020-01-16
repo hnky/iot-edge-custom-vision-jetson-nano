@@ -4,12 +4,9 @@
     "image": {
         "repository": "$CONTAINER_REGISTRY_ADDRESS/cameracapture",
         "tag": {
-            "version": "0.2.11",
+            "version": "$CONTAINER_MODULE_VERSION",
             "platforms": {
-                "amd64": "./amd64.Dockerfile",
-                "arm32v7": "./arm32v7.Dockerfile",
-                "test-arm32v7": "./test-arm32v7.Dockerfile",
-                "test-amd64": "./test-amd64.Dockerfile"
+                "arm64v8": "./Dockerfile.arm64v8"
             }
         },
         "buildOptions": []
