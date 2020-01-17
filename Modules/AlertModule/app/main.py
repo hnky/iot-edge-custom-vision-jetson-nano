@@ -46,7 +46,7 @@ async def main():
 
             if highestProbabilityTag == "none":
               print("Not sending alert to hub => no tag reached probability")
-            else if highestProbabilityTag == "Negative":
+            elif highestProbabilityTag == "Negative":
               print("Not sending alert to hub => Negative tag")
             else:
               print("Sending alert to hub for: {} ".format(highestProbabilityTag))
