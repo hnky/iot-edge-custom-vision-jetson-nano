@@ -21,9 +21,6 @@ def highestProbabilityTagMeetingThreshold(message, threshold):
         if prediction['probability'] > highestProbability and prediction['probability'] > threshold:
             highestProbability = prediction['probability']
             highestProbabilityTag = prediction['tagName']
-    #data = {}
-    #data['tag'] = highestProbabilityTag
-    #data['probability'] = highestProbability
     return highestProbabilityTag
 
 
@@ -37,16 +34,20 @@ async def main():
     # define behavior for receiving an input message on input1
     async def input1_listener(module_client):
         while True:
-            input_message = await module_client.receive_message_on_input("input1")  # blocking call
+            input_message = await module_client.receive_message_on_input("input1")  
             print("the data in the message received on input1 was ")
             print(input_message.data)
             print("custom properties are")
             print(input_message.custom_properties)
+
+
             data = json.loads(input_message.data)
             highestProbabilityTag = highestProbabilityTagMeetingThreshold(data, 0.6)
 
             if highestProbabilityTag == "none":
-              print("Not sending alert to hub")
+              print("Not sending alert to hub => no tag reached probability")
+            else if highestProbabilityTag == "Negative":
+              print("Not sending alert to hub => Negative tag")
             else:
               print("Sending alert to hub for: {} ".format(highestProbabilityTag))
               output_msg = Message(input_message.data)
