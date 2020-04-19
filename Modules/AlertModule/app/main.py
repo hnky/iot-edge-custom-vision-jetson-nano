@@ -35,11 +35,6 @@ async def main():
     async def input1_listener(module_client):
         while True:
             input_message = await module_client.receive_message_on_input("input1")  
-            print("the data in the message received on input1 was ")
-            print(input_message.data)
-            print("custom properties are")
-            print(input_message.custom_properties)
-
 
             data = json.loads(input_message.data)
             highestProbabilityTag = highestProbabilityTagMeetingThreshold(data, 0.6)
@@ -50,7 +45,7 @@ async def main():
               print("Not sending alert to hub => Negative tag")
             else:
               print("Sending alert to hub for: {} ".format(highestProbabilityTag))
-              output_msg = Message(highestProbabilityTag)
+              output_msg = Message("{'tag':'"+highestProbabilityTag+"'}")
               output_msg.message_id = uuid.uuid4()
               output_msg.correlation_id = "test-1234"
               await module_client.send_message_to_output(output_msg,"output1")
