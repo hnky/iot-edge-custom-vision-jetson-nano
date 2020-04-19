@@ -23,7 +23,6 @@ def highestProbabilityTagMeetingThreshold(message, threshold):
             highestProbabilityTag = prediction['tagName']
     return highestProbabilityTag
 
-LAST_TAG = "none"
 
 async def main():
     # The client object is used to interact with your Azure IoT hub.
@@ -41,17 +40,16 @@ async def main():
             highestProbabilityTag = highestProbabilityTagMeetingThreshold(data, 0.6)
 
             if highestProbabilityTag == "none":
-              print("Not sending alert to hub => no tag reached probability")
+                print("Not sending alert to hub => no tag reached probability")
             elif highestProbabilityTag == "Negative":
-              print("Not sending alert to hub => Negative tag")
+                print("Not sending alert to hub => Negative tag")
             else:
-              print("Sending alert to hub for: {} - {}".format(highestProbabilityTag,LAST_TAG))
-              output_msg = Message("{'tag':'"+highestProbabilityTag+"'}")
-              output_msg.message_id = uuid.uuid4()
-              output_msg.correlation_id = "test-1234"
-              await module_client.send_message_to_output(output_msg,"output1")
-              print("Message send")
-              LAST_TAG = highestProbabilityTag
+                print("Sending alert to hub for: {}".format(highestProbabilityTag))
+                output_msg = Message("{'tag':'"+highestProbabilityTag+"'}")
+                output_msg.message_id = uuid.uuid4()
+                output_msg.correlation_id = "test-1234"
+                await module_client.send_message_to_output(output_msg,"output1")
+                print("Message send")
 
 
     # define behavior for halting the application
