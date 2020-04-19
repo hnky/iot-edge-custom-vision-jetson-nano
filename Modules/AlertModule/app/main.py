@@ -24,6 +24,8 @@ def highestProbabilityTagMeetingThreshold(message, threshold):
     return highestProbabilityTag
 
 
+LATEST_TAG = "none"
+
 async def main():
     # The client object is used to interact with your Azure IoT hub.
     module_client = IoTHubModuleClient.create_from_edge_environment()
@@ -33,6 +35,7 @@ async def main():
 
     # define behavior for receiving an input message on input1
     async def input1_listener(module_client):
+        global LATEST_TAG
         while True:
             input_message = await module_client.receive_message_on_input("input1")  
 
@@ -49,7 +52,8 @@ async def main():
                 output_msg.message_id = uuid.uuid4()
                 output_msg.correlation_id = "test-1234"
                 await module_client.send_message_to_output(output_msg,"output1")
-                print("Message send")
+                print("Latest tag: " + LATEST_TAG)
+
 
 
     # define behavior for halting the application
