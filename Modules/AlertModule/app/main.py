@@ -50,7 +50,7 @@ async def main():
               print("Not sending alert to hub => Negative tag")
             else:
               print("Sending alert to hub for: {} ".format(highestProbabilityTag))
-              output_msg = Message(input_message.data)
+              output_msg = Message(highestProbabilityTag)
               output_msg.message_id = uuid.uuid4()
               output_msg.correlation_id = "test-1234"
               await module_client.send_message_to_output(output_msg,"output1")
@@ -64,10 +64,6 @@ async def main():
           ja = True
           if ja == False:
             break
- #           selection = input("Press Q to quit\n")
-  #          if selection == "Q" or selection == "q":
-   #             print("Quitting...")
-    #            break
 
     # Schedule task for listeners
     listeners = asyncio.gather(input1_listener(module_client))
